@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from './assets/theme';
-import './App.css';
 import { Background, NavBar } from './shared';
 import { pages } from './constants';
 import Observer from 'fontfaceobserver';
@@ -9,6 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { About, Contact, Home, Projects } from './pages';
+import './App.css';
 
 const useStyles = makeStyles({
   progress: {
