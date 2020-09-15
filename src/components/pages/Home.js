@@ -2,15 +2,14 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import 'App.css';
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
     marginBottom: theme.spacing(10),
   },
-  name: {
-    fontFamily: 'Megrim',
-  },
   subtitle: {
+    fontFamily: 'Raleway',
     textTransform: 'uppercase',
     fontWeight: '300',
   },
@@ -18,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const Home = () => {
   const classes = useStyles();
+
   return (
     <Grid
       className={classes.homeContainer}
@@ -26,11 +26,11 @@ export const Home = () => {
       justify="center"
       direction="column"
     >
-      <Typography className={classes.name} variant="h1" align="center">
+      <Typography variant="h1" align="center">
         <b>Ciara Southgate</b>
       </Typography>
       <Typography className={classes.subtitle} variant="h4" align="center">
-        Software Developer - Vancouver, BC
+        Software Developer
       </Typography>
     </Grid>
   );

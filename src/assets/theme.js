@@ -1,29 +1,41 @@
 import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
-const lightBlue = {
-  light: '#8EBCC7',
-  main: '#5C94A1',
-  dark: '#226574',
-  contrastText: '#000000',
-};
-
-const darkBlue = {
-  light: '#5A757C',
-  main: '#293F45',
-  dark: '#0C262E',
-  contrastText: '#D8CEB7',
-};
-
 export const theme = responsiveFontSizes(
   createMuiTheme({
     palette: {
-      primary: lightBlue,
-      secondary: darkBlue,
+      type: 'dark',
+      text: {
+        primary: '#D8D8D8',
+        secondary: '#D8D8D8',
+      },
+      primary: {
+        main: '#24697A',
+        contrastText: '#D8D8D8',
+      },
+      secondary: {
+        main: '#00acc1',
+      },
     },
     typography: {
-      fontFamily: `"Open Sans", "Roboto", sans-serif`,
+      fontFamily: `"Raleway", "Open Sans", "Roboto", sans-serif`,
+      h1: {
+        fontFamily: `"Megrim", "sans-serif"`,
+      },
+      h2: {
+        fontFamily: `"Megrim", "sans-serif"`,
+      },
+      h3: {
+        fontFamily: `"Megrim", "sans-serif"`,
+      },
+    },
+    breakpoints: {
+      values: {
+        xs: 0,
+        sm: 320,
+        md: 425,
+        lg: 768,
+        xl: 1440,
+      },
     },
   }),
 );
-
-// export const theme = responsiveFontSizes(themeElements);
