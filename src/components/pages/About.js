@@ -80,22 +80,30 @@ export const About = () => {
           who is pretty much the cutest thing that ever existed.
         </Typography>
         <br />
-        <Typography>
-          Some fun facts about me:
-          <ul>
-            <li>I could fly a plane before I could drive a car.</li>
-            <li>I studied bassoon performance for three years.</li>
-            <li>In my spare time, I like to make dice.</li>
-            <li>My favourite board game weighs about as much as my dog.</li>
-            <li>
+        <Typography>Some fun facts about me:</Typography>
+        <ul>
+          <li>
+            <Typography>I could fly a plane before I could drive a car.</Typography>
+          </li>
+          <li>
+            <Typography>I studied bassoon performance for three years.</Typography>
+          </li>
+          <li>
+            <Typography>In my spare time, I like to make dice.</Typography>
+          </li>
+          <li>
+            <Typography>My favourite board game weighs about as much as my dog.</Typography>
+          </li>
+          <li>
+            <Typography>
               I spent over 200 hours volunteering on the crisis line for{' '}
               <Link className={classes.link} href="https://www.wavaw.ca/">
                 WAVAW Rape Crisis Centre
               </Link>
               .
-            </li>
-          </ul>
-        </Typography>
+            </Typography>
+          </li>
+        </ul>
       </div>
     </Container>
   );

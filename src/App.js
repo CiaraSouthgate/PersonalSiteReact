@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from './assets/theme';
-import { Background, NavBar, NavMenu, NavTabs } from 'components';
-import { pages } from 'assets/constants';
+import { NavBar, NavMenu, NavTabs, PageContainer } from 'components';
+import { pages, topBarHeight } from 'assets/constants';
 import Observer from 'fontfaceobserver';
 import './App.css';
 import { Loading } from './components/pages/Loading';
@@ -19,36 +19,16 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     bottom: theme.spacing(3),
     right: theme.spacing(3),
+    opacity: 0.7,
   },
 }));
 
 const App = () => {
   const classes = useStyles();
-  const appPages = pages;
 
-  const [currentPage, setCurrentPage] = useState(appPages.HOME);
+  const [currentPage, setCurrentPage] = useState(pages.HOME);
   const [loaded, setLoaded] = useState(false);
-  const [fabVisible, setFabVisible] = useState(false);
-
-  const handlePageChange = (event, newValue) => {
-    if (currentPage !== newValue) {
-      setCurrentPage(newValue);
-    }
-  };
-
-  const transitionDuration = {
-    enter: theme.transitions.duration.enteringScreen,
-    exit: theme.transitions.duration.leavingScreen,
-  };
-
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-
-  const handleScroll = (newValue) => {
-    if (Object.values(appPages).includes(newValue)) {
-      setCurrentPage(newValue);
-      scrollToRef(newValue);
-    }
-  };
+  let mobile = useMediaQuery(useTheme().breakpoints.down('sm'));
 
   useEffect(() => {
     const megrim = new Observer('Megrim');
@@ -57,41 +37,86 @@ const App = () => {
     Promise.all([megrim.load(), openSans.load()]).then(function () {
       setLoaded(true);
     });
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   });
+
+  const handleScroll = () => {
+    if (mobile) {
+      const position = window.scrollY;
+      for (let key of Object.keys(pages)) {
+        const page = pages[key];
+        const element = document.getElementById(page.name);
+        const top = element.offsetTop;
+        const bottom = top + element.scrollHeight - topBarHeight;
+
+        if (position > top - topBarHeight && position < bottom) {
+          setCurrentPage(pages[key]);
+          return;
+        }
+      }
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+  };
+
+  const handlePageChange = (event, page) => {
+    if (currentPage !== page) {
+      setCurrentPage(page);
+    }
+  };
+
+  const transitionDuration = {
+    enter: theme.transitions.duration.enteringScreen,
+    exit: theme.transitions.duration.leavingScreen,
+  };
+
+  const handleNavMenuClicked = (elementName) => {
+    const element = document.getElementById(elementName);
+    window.scrollTo({ top: element.offsetTop - topBarHeight, behavior: 'smooth' });
+  };
 
   return (
     <ThemeProvider theme={theme}>
-      {useMediaQuery(useTheme().breakpoints.down('sm')) ? (
+      {mobile ? (
         <div>
           <NavBar
             showName={false}
-            navigation={<NavMenu pages={appPages} handlePageChange={handleScroll} />}
+            navigation={<NavMenu handlePageChange={handleNavMenuClicked} />}
           />
-          <Background
-            content={loaded ? appPages.HOME.component : <Loading />}
-            dimBackground={false}
-          />
+          <div id={pages.HOME.name}>
+            <PageContainer
+              content={loaded ? pages.HOME.component : <Loading />}
+              dimBackground={false}
+            />
+          </div>
           <Divider />
-          <Background
-            content={Object.values(appPages).map((page) => {
+          <PageContainer
+            content={Object.values(pages).map((page) => {
               return (
-                <div>
-                  {page !== appPages.HOME && page.component}
-                  <Divider variant="middle" />
-                </div>
+                page !== pages.HOME && (
+                  <div id={page.name} key={page.name}>
+                    {page.component}
+                  </div>
+                )
               );
             })}
             dimBackground={true}
           />
           <Zoom
-            in={fabVisible}
+            in={currentPage !== pages.HOME}
             timeout={transitionDuration}
             style={{
-              transitionDelay: `${fabVisible ? transitionDuration.exit : 0}ms`,
+              transitionDelay: `${currentPage !== pages.HOME ? transitionDuration.exit : 0}ms`,
             }}
             unmountOnExit
           >
-            <Fab size="large" color="secondary" className={classes.fab}>
+            <Fab className={classes.fab} size="large" color="secondary" onClick={scrollToTop}>
               <ArrowUpwardIcon />
             </Fab>
           </Zoom>
@@ -99,21 +124,16 @@ const App = () => {
       ) : (
         <>
           <NavBar
-            showName={currentPage !== appPages.HOME}
-            navigation={
-              <NavTabs
-                pages={appPages}
-                handlePageChange={handlePageChange}
-                currentPage={currentPage}
-              />
-            }
+            showName={currentPage !== pages.HOME}
+            buttons
+            navigation={<NavTabs handlePageChange={handlePageChange} currentPage={currentPage} />}
           />
-          <Background
+          <PageContainer
             content={loaded ? currentPage.component : <Loading />}
             backgroundImageClass={
-              currentPage === appPages.HOME ? 'blueBackground' : 'blueBackground-NoLine'
+              currentPage === pages.HOME ? 'blueBackground' : 'blueBackground-NoLine'
             }
-            dimBackground={currentPage !== appPages.HOME}
+            dimBackground={currentPage !== pages.HOME}
           />
         </>
       )}

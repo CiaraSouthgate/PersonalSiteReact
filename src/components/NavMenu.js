@@ -8,13 +8,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider } from '@material-ui/core';
 import { LinkButtons } from './LinkButtons';
+import { pages } from 'assets/constants';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
     display: 'flex',
-  },
-  listItem: {
-    // textAlign: 'end',
   },
   linkIcons: {
     marginTop: theme.spacing(1),
@@ -23,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NavMenu = ({ pages, handlePageChange }) => {
+export const NavMenu = ({ handlePageChange }) => {
   const classes = useStyles();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -43,12 +41,11 @@ export const NavMenu = ({ pages, handlePageChange }) => {
             return (
               page !== pages.HOME && (
                 <ListItem
-                  className={classes.listItem}
+                  key={page.name}
                   button
                   onClick={() => {
-                    handlePageChange(null, page);
+                    handlePageChange(page.name);
                   }}
-                  value={page}
                 >
                   <ListItemText primary={page.name} />
                 </ListItem>
@@ -57,7 +54,7 @@ export const NavMenu = ({ pages, handlePageChange }) => {
           })}
         </List>
         <Divider variant="middle" />
-        <LinkButtons className={classes.linkIcons} size="large" />
+        <LinkButtons className={classes.linkIcons} />
       </Drawer>
     </div>
   );

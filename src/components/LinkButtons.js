@@ -1,33 +1,39 @@
 import { externalLinks } from '../assets/constants';
-import { ButtonGroup, IconButton } from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 import React from 'react';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import IconButton from '@material-ui/core/IconButton';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   iconLink: {
     color: 'inherit',
   },
-});
+  container: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+  },
+}));
 
-export const LinkButtons = (props) => {
+export const LinkButtons = () => {
   const classes = useStyles();
-
   return (
-    <ButtonGroup {...props}>
+    <div className={classes.container}>
       {Object.values(externalLinks).map(({ name, url, icon }) => {
         return (
           <IconButton
             className={classes.iconLink}
+            key={name}
             component={Link}
             href={url}
             target="_blank"
-            key={name}
           >
             {icon}
           </IconButton>
         );
       })}
-    </ButtonGroup>
+    </div>
   );
 };

@@ -31,10 +31,10 @@ export const theme = responsiveFontSizes(
     breakpoints: {
       values: {
         xs: 0,
-        sm: 320,
-        md: 425,
-        lg: 768,
-        xl: 1440,
+        sm: 321,
+        md: 426,
+        lg: 769,
+        xl: 1441,
       },
     },
   }),

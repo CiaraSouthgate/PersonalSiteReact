@@ -39,9 +39,12 @@ export const SkillCategory = ({ category, expanded, onChange }) => {
         <Grid container spacing={2}>
           {Object.values(content).map((item) => {
             return (
-              // <Grid item xs={12} lg="auto">
-              <SkillCard icon={item.logoIcon} label={item.name} description={item.description} />
-              // </Grid>
+              <SkillCard
+                icon={item.logoIcon}
+                label={item.name}
+                description={item.description}
+                key={item.name}
+              />
             );
           })}
         </Grid>

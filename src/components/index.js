@@ -1,4 +1,4 @@
-export * from './Background';
+export * from './PageContainer';
 export * from './LinkButtons';
 export * from './NavBar';
 export * from './NavTabs';

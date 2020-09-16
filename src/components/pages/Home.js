@@ -6,7 +6,9 @@ import 'App.css';
 
 const useStyles = makeStyles((theme) => ({
   homeContainer: {
-    marginBottom: theme.spacing(10),
+    [theme.breakpoints.up('lg')]: {
+      marginBottom: theme.spacing(10),
+    },
   },
   subtitle: {
     fontFamily: 'Raleway',
