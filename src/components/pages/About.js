@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   aboutDiv: {
     marginBottom: theme.spacing(2),
     textAlign: 'justify',
-    width: '100%',
+    // width: '100%',
     float: 'left',
   },
   link: {
@@ -32,6 +32,11 @@ const useStyles = makeStyles((theme) => ({
     shapeOutside: 'circle(50%)',
     marginLeft: theme.spacing(1),
     border: `5px solid ${theme.palette.primary.main}`,
+  },
+  asterix: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none',
+    },
   },
 }));
 
@@ -53,7 +58,9 @@ export const About = () => {
         <Typography variant="h3">
           Hey, I'm{' '}
           <StyledToolTip title={'(kee-ra)'}>
-            <span>Ciara*</span>
+            <span>
+              Ciara<span className={classes.asterix}>*</span>
+            </span>
           </StyledToolTip>
           . It's nice to meet you.
         </Typography>

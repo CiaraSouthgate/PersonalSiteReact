@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(2),
     color: 'inherit',
     height: topBarHeight,
+    [theme.breakpoints.down('sm')]: {
+      backgroundColor: 'transparent',
+      boxShadow: 'none',
+    },
   },
   name: {
     fontFamily: 'Megrim',

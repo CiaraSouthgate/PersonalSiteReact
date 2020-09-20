@@ -71,7 +71,7 @@ export const Skills = () => {
           with that aren't here, but these are the ones I'm most comfortable with.
         </Typography>
         <List>
-          {Object.values(skillsList).map((category) => {
+          {skillsList.map((category) => {
             return (
               <SkillCategory
                 category={category}

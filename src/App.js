@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { theme } from './assets/theme';
 import { NavBar, NavMenu, NavTabs, PageContainer } from 'components';
-import { pages, topBarHeight } from 'assets/constants';
+import { pages } from 'assets/constants';
 import Observer from 'fontfaceobserver';
 import './App.css';
 import { Loading } from './components/pages/Loading';
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
 
-  const [currentPage, setCurrentPage] = useState(pages.HOME);
+  const [currentPage, setCurrentPage] = useState(pages.PROJECTS);
   const [loaded, setLoaded] = useState(false);
   let mobile = useMediaQuery(useTheme().breakpoints.down('sm'));
 
@@ -51,9 +51,9 @@ const App = () => {
         const page = pages[key];
         const element = document.getElementById(page.name);
         const top = element.offsetTop;
-        const bottom = top + element.scrollHeight - topBarHeight;
+        const bottom = top + element.scrollHeight;
 
-        if (position > top - topBarHeight && position < bottom) {
+        if (position > top && position < bottom) {
           setCurrentPage(pages[key]);
           return;
         }
@@ -78,7 +78,7 @@ const App = () => {
 
   const handleNavMenuClicked = (elementName) => {
     const element = document.getElementById(elementName);
-    window.scrollTo({ top: element.offsetTop - topBarHeight, behavior: 'smooth' });
+    window.scrollTo({ top: element.offsetTop + 1, behavior: 'smooth' });
   };
 
   return (
@@ -87,7 +87,9 @@ const App = () => {
         <div>
           <NavBar
             showName={false}
-            navigation={<NavMenu handlePageChange={handleNavMenuClicked} />}
+            navigation={
+              <NavMenu handlePageChange={handleNavMenuClicked} currentPage={currentPage} />
+            }
           />
           <div id={pages.HOME.name}>
             <PageContainer

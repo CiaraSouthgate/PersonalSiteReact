@@ -21,7 +21,7 @@ export const LinkButtons = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
-      {Object.values(externalLinks).map(({ name, url, icon }) => {
+      {externalLinks.map(({ name, url, icon }) => {
         return (
           <IconButton
             className={classes.iconLink}

@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const NavMenu = ({ handlePageChange }) => {
+export const NavMenu = ({ handlePageChange, currentPage }) => {
   const classes = useStyles();
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -32,7 +32,7 @@ export const NavMenu = ({ handlePageChange }) => {
 
   return (
     <div onClick={toggleDrawer}>
-      <IconButton color="inherit" onClick={toggleDrawer}>
+      <IconButton onClick={toggleDrawer}>
         <MenuIcon />
       </IconButton>
       <Drawer className={classes.drawer} anchor="right" open={drawerOpen}>
@@ -43,11 +43,15 @@ export const NavMenu = ({ handlePageChange }) => {
                 <ListItem
                   key={page.name}
                   button
+                  selected={currentPage === page}
                   onClick={() => {
                     handlePageChange(page.name);
                   }}
                 >
-                  <ListItemText primary={page.name} />
+                  <ListItemText
+                    primary={page.name}
+                    primaryTypographyProps={{ variant: 'button' }}
+                  />
                 </ListItem>
               )
             );

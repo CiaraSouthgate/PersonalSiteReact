@@ -12,6 +12,7 @@
     "fontfaceobserver": "^2.1.0",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "react-transition-group": "1.x",
@@ -37,5 +38,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "devDependencies": {}
 }

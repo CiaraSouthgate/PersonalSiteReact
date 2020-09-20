@@ -18,6 +18,12 @@ a {
     margin: 0;
 }
 
+.imageGallery {
+    width: 50%;
+    /*max-width: 500px;*/
+    align-self: center;
+}
+
 .blueBackground {
     background-image: url("assets/images/blue-background-line.jpg");
     background-size: cover;
@@ -52,6 +58,34 @@ a {
 @keyframes slide-out-to-right {
     0% {transform: translateX(0)}
     100% {transform: translateX(100%)}
+}
+
+@keyframes fade-in {
+    from {opacity: 0.01}
+    to {opacity: 1}
+}
+
+@keyframes fade-out {
+    from {opacity: 1}
+    to {opacity: 0.01}
+}
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 200ms ease-in;
+}
+
+.fade-leave {
+    opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+    opacity: 0.01;
+    transition: opacity 200ms ease-in;
 }
 
 .right-enter {
@@ -93,4 +127,16 @@ a {
     display: flex;
     min-height: calc(100vh - 48px);
     width: 100vw;
+}
+
+.slider-btn {
+    --slider-height-percentage: 60%;
+    --slider-transition-duration: 273ms;
+    --organic-arrow-thickness: 8px;
+    --organic-arrow-border-radius: 9px;
+    --organic-arrow-height: 40px;
+    --organic-arrow-color: #ffffff;
+    --control-button-width: 9%;
+    --control-button-height: 25%;
+    --control-button-background: transparent;
 }

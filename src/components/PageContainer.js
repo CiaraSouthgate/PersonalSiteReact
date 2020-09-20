@@ -5,7 +5,7 @@ import 'App.css';
 
 const useStyles = makeStyles((theme) => ({
   mainBackground: {
-    width: '100vw',
+    width: '100%',
     height: '100%',
     minHeight: '100vh',
     [theme.breakpoints.up('lg')]: {
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   contentsDiv: {
-    width: '100vw',
+    width: '100%',
     minHeight: `calc(100vh - ${topBarHeight}px)`,
     display: 'flex',
     flexDirection: 'column',

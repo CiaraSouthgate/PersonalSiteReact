@@ -1,3 +1,4 @@
+export * from './ImageGallery';
 export * from './PageContainer';
 export * from './LinkButtons';
 export * from './NavBar';

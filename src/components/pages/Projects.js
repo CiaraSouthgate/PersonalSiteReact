@@ -2,31 +2,41 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import Link from '@material-ui/core/Link';
 import 'App.css';
+import { projectsList } from '../../assets/constants/projectsList';
+import useTheme from '@material-ui/core/styles/useTheme';
+import AwesomeSlider from 'react-awesome-slider/src/core';
 
 const useStyles = makeStyles((theme) => ({
   container: {
     width: '75%',
     padding: `${theme.spacing(2)}px 0`,
-  },
-  link: {
-    color: theme.palette.primary.contrastText,
+    display: 'flex',
+    flexDirection: 'column',
   },
 }));
 
 export const Projects = () => {
   const classes = useStyles();
+  const theme = useTheme();
+
   return (
     <Container className={classes.container}>
-      <Typography variant="h3">Projects</Typography>
-      <Typography>
-        This section is under construction. In the meantime, feel free to visit my{' '}
-        <Link className={classes.link} href="https://github.com/CiaraSouthgate">
-          GitHub page
-        </Link>{' '}
-        to see some of the projects I've worked on.
-      </Typography>
+      {projectsList.map((project) => {
+        return (
+          <div>
+            <Typography variant="h3">{project.title}</Typography>
+            <Typography>{project.description}</Typography>
+            <AwesomeSlider>
+              media={[{ source: project.images[0] }, { source: project.images[1] }]}
+              {/*{project.images.map((image) => {*/}
+              {/*  return <div data-src={image.path} />;*/}
+              {/*})}*/}
+            </AwesomeSlider>
+            {/*<ImageGallery className={classes.imageGallery} images={project.images} />*/}
+          </div>
+        );
+      })}
     </Container>
   );
 };
