@@ -38,10 +38,12 @@ const App = () => {
       setLoaded(true);
     });
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    if (mobile) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }
   });
 
   const handleScroll = () => {

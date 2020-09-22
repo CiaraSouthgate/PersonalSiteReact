@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
   aboutDiv: {
     marginBottom: theme.spacing(2),
     textAlign: 'justify',
-    // width: '100%',
     float: 'left',
   },
   link: {
